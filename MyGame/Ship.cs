@@ -19,8 +19,9 @@ namespace MyGame
         private readonly Sprite _sprite = new Sprite();
         public Ship()
         {
-            _sprite.Texture = Game.GetTexture("Resources/ship.png");
+            _sprite.Texture = Game.GetTexture("Resources/harlow.png");
             _sprite.Position = new Vector2f(100, 100);
+            AssignTag("harlow");
         }
 
         public override void Draw()
@@ -36,10 +37,10 @@ namespace MyGame
 
             int msElapsed = Elapsed.AsMilliseconds();
 
-            if (Keyboard.IsKeyPressed(Keyboard.Key.Up)) { y -= Speed * msElapsed; }
-            if (Keyboard.IsKeyPressed(Keyboard.Key.Down)) { y += Speed * msElapsed; }
-            if (Keyboard.IsKeyPressed(Keyboard.Key.Left)) { x -= Speed * msElapsed; }
-            if (Keyboard.IsKeyPressed(Keyboard.Key.Right)) { x += Speed * msElapsed; }
+            if (Keyboard.IsKeyPressed(Keyboard.Key.W)) { y -= Speed * msElapsed; }
+            if (Keyboard.IsKeyPressed(Keyboard.Key.S)) { y += Speed * msElapsed; }
+            if (Keyboard.IsKeyPressed(Keyboard.Key.A)) { x -= Speed * msElapsed; }
+            if (Keyboard.IsKeyPressed(Keyboard.Key.D)) { x += Speed * msElapsed; }
             _sprite.Position = new Vector2f (x, y);    
             
             if(_fireTimer > 0) { _fireTimer -= msElapsed; }

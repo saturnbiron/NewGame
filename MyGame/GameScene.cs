@@ -6,7 +6,7 @@ namespace MyGame
 {
     class GameScene : Scene
     {
-        private int _lives = 3;
+        private int _lives = 72;
         private int _score;
         public GameScene()
         {
@@ -18,6 +18,16 @@ namespace MyGame
 
             Score score = new Score(new Vector2f(10.0f, 10.0f));
             AddGameObject(score);
+
+            blueglitter blueglitter = new blueglitter();
+            AddGameObject(blueglitter);
+
+           
+
+            CarSpawner carspawner = new CarSpawner();
+            AddGameObject(carspawner);
+
+          
         }
        
         public int GetScore()
@@ -35,6 +45,11 @@ namespace MyGame
             return _lives;
         }
 
+        public void IncreaseLives()
+        {
+            ++_lives;
+        }
+       
         public void DecreaseLives()
         {
             --_lives;

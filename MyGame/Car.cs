@@ -10,18 +10,16 @@ using System.Threading.Tasks;
 
 namespace MyGame
 {
-    class meteor : GameObject
+    class Car : GameObject
     {
-        private const float speed = 0.5f; 
-
+        private const float speed = 1.0f;
         private readonly Sprite _sprite = new Sprite();
-
-        public meteor(Vector2f pos)
+        
+        public Car(Vector2f pos)
         {
-            _sprite.Texture = Game.GetTexture("Resources/meteor.png");
+            _sprite.Texture = Game.GetTexture("Resources/car.png");
             _sprite.Position = pos;
-            AssignTag("meteor");
-            SetCollisionCheckEnabled(true);
+            AssignTag("Car");
         }
 
         public override void Draw()
@@ -34,11 +32,8 @@ namespace MyGame
             int msElapsed = elapsed.AsMilliseconds();
             Vector2f pos = _sprite.Position;
 
-            if(pos.X < _sprite.GetGlobalBounds().Width * -1)
+            if (pos.X < _sprite.GetGlobalBounds().Width * -1)
             {
-                GameScene scene = (GameScene)Game.CurrentScene;
-                scene.DecreaseLives();
-
                 MakeDead();
             }
             else
@@ -54,19 +49,11 @@ namespace MyGame
 
         public override void HandleCollision(GameObject otherGameObject)
         {
-            if (otherGameObject.HasTag("laser"))
+            if (otherGameObject.HasTag("laser")) ;
             {
                 otherGameObject.MakeDead();
-                GameScene scene = (GameScene)Game.CurrentScene;
-                scene.IncreaseScore();
             }
-            Vector2f pos = _sprite.Position;
-            pos.X = pos.X + (float)_sprite.GetGlobalBounds().Width / 5.0f;
-            pos.Y = pos.Y + (float)_sprite.GetGlobalBounds().Height / 5.0f;
-            Explosion explosion = new Explosion(pos);
-            Game.CurrentScene.AddGameObject(explosion);
             MakeDead();
         }
-
     }
 }
