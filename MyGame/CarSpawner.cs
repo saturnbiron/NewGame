@@ -12,7 +12,7 @@ namespace MyGame
 {
     class CarSpawner : GameObject
     {
-        private const int SpawnDelay = 100; // number of ms between each car spawn
+        private const int SpawnDelay = 2000; // number of ms between each car spawn
 
         private int _timer;
 
@@ -32,12 +32,7 @@ namespace MyGame
 
                 Car car = new Car(new Vector2f(carX, carY));        //creates new car
                 Game.CurrentScene.AddGameObject(car);
-
             }
         }
-
-        
-
-
     }
 }

@@ -12,12 +12,13 @@ namespace MyGame
 {
     class Laser : GameObject
     {
-        private const float Speed = 1.2f;
+        private const float Speed = 1.0f;
         private readonly Sprite _sprite = new Sprite();
         public Laser(Vector2f pos)
         {
             _sprite.Texture = Game.GetTexture("Resources/laser.png");
             _sprite.Position = pos;
+            _sprite.Scale = new Vector2f(2.0f, 2.0f);
             AssignTag("laser");
         }
         public override void Draw()

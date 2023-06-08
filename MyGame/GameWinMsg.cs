@@ -1,7 +1,7 @@
 ﻿using GameEngine;
 using SFML.Graphics;
-using SFML.Window;
 using SFML.System;
+using SFML.Window;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,22 +10,26 @@ using System.Threading.Tasks;
 
 namespace MyGame
 {
-    class GameOverMessage : GameObject
+    class GameWinMsg : GameObject
     {
         private readonly Text _text = new Text();
-        public GameOverMessage(int score)
+               
+
+        public GameWinMsg(int score)
         {
             _text.Font = Game.GetFont("Resources/Courneuf-Regular.ttf");
-            _text.Position = new Vector2f(50.0f, 50.0f);
-            _text.CharacterSize = 48;
+            _text.Position = new Vector2f(90, 280);
+            _text.CharacterSize = 64;
             _text.FillColor = Color.Blue;
-            _text.DisplayedString = "L\n\nYOUR SCORE: " + score + "\n\nPRESS ENTER TO CONTINUE";
-           
+            _text.DisplayedString = "       you won lets go\n\n         your score: " + score  +  "\n\npress enter to go to the menu";
         }
+
         public override void Draw()
         {
             Game.RenderWindow.Draw(_text);
+           
         }
+
         public override void Update(Time elapsed)
         {
             if (Keyboard.IsKeyPressed(Keyboard.Key.Enter))
@@ -34,5 +38,6 @@ namespace MyGame
                 Game.SetScene(scene);
             }
         }
+
     }
 }

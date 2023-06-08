@@ -4,21 +4,23 @@ using SFML.System;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace MyGame
 {
-    class Score : GameObject
+    class Glitter : GameObject
     {
         private readonly Text _text = new Text();
-        public Score(Vector2f pos)
+
+        public Glitter(Vector2f pos)
         {
             _text.Font = Game.GetFont("Resources/Courneuf-Regular.ttf");
             _text.Position = pos;
-            _text.CharacterSize = 24;
-            _text.FillColor = Color.Black;
-            AssignTag("Score");
+            _text.CharacterSize = 38;
+            _text.FillColor = Color.Green;
+            AssignTag("Glitter");
         }
 
         public override void Draw()
@@ -29,7 +31,7 @@ namespace MyGame
         public override void Update(Time elapsed)
         {
             GameScene scene = (GameScene)Game.CurrentScene;
-            _text.DisplayedString = "Score: " + scene.GetScore();
+            _text.DisplayedString = "Glitter: " + scene.GetGlitter();
         }
     }
 }

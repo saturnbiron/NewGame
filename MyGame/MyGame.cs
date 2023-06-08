@@ -5,7 +5,7 @@ namespace MyGame
     static class MyGame
     {
         private const int WindowWidth = 1000;
-        private const int WindowHeight = 800;
+        private const int WindowHeight = 600;
 
         private const string WindowTitle = "gushers glitter and mo";
 

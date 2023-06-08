@@ -12,13 +12,15 @@ namespace MyGame
 {
     class Car : GameObject
     {
-        private const float speed = 1.0f;
+        private const float speed = 32.0f;
         private readonly Sprite _sprite = new Sprite();
         
         public Car(Vector2f pos)
         {
             _sprite.Texture = Game.GetTexture("Resources/car.png");
             _sprite.Position = pos;
+            _sprite.Scale = new Vector2f(0.5f, 0.5f);
+            SetCollisionCheckEnabled(true);
             AssignTag("Car");
         }
 
@@ -49,10 +51,17 @@ namespace MyGame
 
         public override void HandleCollision(GameObject otherGameObject)
         {
-            if (otherGameObject.HasTag("laser")) ;
+            if (otherGameObject.HasTag("laser")) 
             {
                 otherGameObject.MakeDead();
+                GameScene scene = (GameScene)Game.CurrentScene;
+                scene.IncreaseScore();
             }
+            Vector2f pos = _sprite.Position;
+            pos.X = pos.X + (float)_sprite.GetGlobalBounds().Width / 5.0f;
+            pos.Y = pos.Y + (float)_sprite.GetGlobalBounds().Height / 5.0f;
+            Explosion explosion = new Explosion(pos);
+            Game.CurrentScene.AddGameObject(explosion);
             MakeDead();
         }
     }

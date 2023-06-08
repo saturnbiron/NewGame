@@ -12,16 +12,16 @@ namespace MyGame
 {
     class blueglitter : GameObject
     {
-        private const float Speed = 0.3f;
-        private const int FireDelay = 200;
-        private int _fireTimer;
-
+        private const float speed = 0.2f;
+       
         private readonly Sprite _sprite = new Sprite();
-        public blueglitter()
+        public blueglitter(Vector2f pos)
         {
             _sprite.Texture = Game.GetTexture("Resources/blueglitter.png");
-            _sprite.Position = new Vector2f(400, 600);
+            _sprite.Position = pos;
             _sprite.Scale = new Vector2f(4.0f, 4.0f);
+            SetCollisionCheckEnabled(true);
+            AssignTag("blueglitter");
         }
 
         public override void Draw()
@@ -31,9 +31,19 @@ namespace MyGame
 
         public override void Update(Time Elapsed)
         {
+            int msElapsed = Elapsed.AsMilliseconds();
             Vector2f pos = _sprite.Position;
-            float x = pos.X;
-            float y = pos.Y;
+
+            if (pos.X < _sprite.GetGlobalBounds().Width * -1)
+            {
+                GameScene scene = (GameScene)Game.CurrentScene;
+                scene.IncreaseGlitter();
+                MakeDead();
+            }
+            else
+            {
+                _sprite.Position = new Vector2f(pos.X - speed * msElapsed, pos.Y);
+            }
         }
 
         public override FloatRect GetCollisionRect()
@@ -43,11 +53,19 @@ namespace MyGame
 
         public override void HandleCollision(GameObject otherGameObject)
         {
-            if (otherGameObject.HasTag("harlow"))
+            if (otherGameObject.HasTag("laser"))
             {
                 otherGameObject.MakeDead();
+                GameScene scene = (GameScene)Game.CurrentScene;
+                scene.IncreaseGlitter();
             }
+            Vector2f pos = _sprite.Position;
+            pos.X = pos.X + (float)_sprite.GetGlobalBounds().Width / 4.0f;
+            pos.Y = pos.Y + (float)_sprite.GetGlobalBounds().Height / 4.0f;
+            Explosion explosion = new Explosion(pos);
+            Game.CurrentScene.AddGameObject(explosion);
             MakeDead();
+           
         }
 
 

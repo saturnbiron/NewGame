@@ -20,6 +20,7 @@ namespace MyGame
             Texture = Game.GetTexture("Resources/explosion-spritesheet.png");
             SetUpExplosionAnimation();
             PlayAnimation("explosion", AnimationMode.OnceForwards);
+            AssignTag("explosion");
 
             _boom.SoundBuffer = Game.GetSoundBuffer("Resources/boom.wav");
             _boom.Play();
@@ -47,9 +48,7 @@ namespace MyGame
                 new IntRect(256, 0, 64, 64),
                 new IntRect(320, 0, 64, 64),
                 new IntRect(384, 0, 64, 64),
-                new IntRect(448, 0, 64, 64),
-                new IntRect(512, 0, 64, 64),
-                new IntRect(576, 0, 64, 64 )
+                new IntRect(448, 0, 64, 64 )
             };
             AddAnimation("explosion", frames);
         }

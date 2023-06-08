@@ -273,7 +273,7 @@ namespace GameEngine
                     originX = rect.Width;
                     break;
             }
-
+            
             switch (_originMode)
             {
                 case OriginMode.MiddleLeft:

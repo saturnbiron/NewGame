@@ -9,16 +9,17 @@ using System.Threading.Tasks;
 
 namespace MyGame
 {
-    class Score : GameObject
+    class MentalHealth : GameObject
     {
         private readonly Text _text = new Text();
-        public Score(Vector2f pos)
+
+        public MentalHealth(Vector2f pos)
         {
             _text.Font = Game.GetFont("Resources/Courneuf-Regular.ttf");
             _text.Position = pos;
             _text.CharacterSize = 24;
             _text.FillColor = Color.Black;
-            AssignTag("Score");
+            AssignTag("Mental Health");
         }
 
         public override void Draw()
@@ -29,7 +30,7 @@ namespace MyGame
         public override void Update(Time elapsed)
         {
             GameScene scene = (GameScene)Game.CurrentScene;
-            _text.DisplayedString = "Score: " + scene.GetScore();
+            _text.DisplayedString = "Mental Health: " + scene.GetMentalHealth();
         }
     }
 }
